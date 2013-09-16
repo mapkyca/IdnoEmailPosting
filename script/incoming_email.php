@@ -1,6 +1,6 @@
 <?php
 
-	require_once(dirname(dirname(dirname(__FILE__))) . '/Idno/start.php');
+	require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Idno/start.php');
         
         require_once(dirname(dirname(__FILE__)).'/MimeMailParser.php');
         require_once(dirname(dirname(__FILE__)).'/MimeMailParser_attachment.php');
