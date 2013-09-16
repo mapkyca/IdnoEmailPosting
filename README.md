@@ -25,7 +25,7 @@ Installation
   For example, create an entry in /etc/aliases as follows:
   
 ```
-	idno: "/my/idno/site/IdnoPlugins/IdnoEmailPosting/script/incoming_email.php"
+	idno: "|/usr/bin/php -q /my/idno/site/IdnoPlugins/IdnoEmailPosting/script/incoming_email.php"
 ```
   And then bounce any email you get to this alias.
   
