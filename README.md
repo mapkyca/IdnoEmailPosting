@@ -36,11 +36,16 @@ Installation
 catch_idno:
         debug_print = "R: Idno posting for $local_part@$domain"
         driver = redirect
-        local_parts = [your secret email code (before the @)]
         domains = [your domain]
         data = idno@localhost
 
 ```
+  If you only want to add support for a _specific_ address, but allow all other messages to behave normally, then add the following to the above.
+  
+```
+        local_parts = [your secret email code (before the @)]
+```
+
 
   Note, by default, exim doesn't allow piping to a script. Enable it by editing/creating exim4.conf.localmacros and adding:
 
