@@ -4,6 +4,12 @@ Post via email support for Idno
 This plugin provides the ability to post messages to your idno powered site 
 by sending an email to a special address.
 
+Out of the box the plugin supports:
+
+* Status updates (if subject + body length < 140 chars)
+* Text updates (if subject + body > 140 chars)
+* Photos (if image attachment attached)
+
 Requirements
 ------------
 * mailparse (pecl install mailparse)
