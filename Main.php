@@ -58,8 +58,36 @@
                     // If there are attachments, see if any of them are pictures
                     if (!empty($attachments)) {
                         
-                        // TODO
-                        
+                        foreach ($attachments as $attachment) {
+                            
+                            $content_type = $attachment->getContentType();
+                            error_log("Found attachment of $content_type...");
+                            
+                            // We know how to handle images...
+                            if (strpos($content_type, 'image/')!== false)
+                            {
+                                error_log("I know how to handle an image...");
+                                
+                                // Write temp file
+                                $tmpfname = tempnam("/tmp", "IdnoEmailPosting");
+
+                                $handle = fopen($tmpfname, "w");
+                                fwrite($handle, $attachment->getContent());
+                                fclose($handle);
+                                
+                                // Fake a file upload
+                                $_FILES = [
+                                    'photo' => [
+                                        'tmp_name' => $tmpfname,
+                                        'name' => $attachment->getFilename(),
+                                        'type' => $content_type
+                                    ]
+                                ];
+                                
+                                $this->callAction('/photo/edit', 'IdnoPlugins\Photo\Pages\Edit', ['body' => $body, 'title' => $subject]);
+                            }
+                            
+                        }
                     }
                     
                     
