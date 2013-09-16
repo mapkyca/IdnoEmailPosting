@@ -8,9 +8,9 @@
     	$EmailParser->setStream($stream);
 
 	// Extract some basics
-    	$to = $EmailParser->getHeader('to');
-    	$from = $EmailParser->extractEmail('from');
-    	$subject = $EmailParser->getHeader('subject');
+    	$to = trim($EmailParser->getHeader('to'));
+    	$from = trim($EmailParser->extractEmail('from'));
+    	$subject = trim($EmailParser->getHeader('subject'));
 
         // See if we've got a user with that email
         if ($user = \IdnoPlugins\IdnoEmailPosting\Main::getUserBySecretEmail($to)) {
@@ -29,12 +29,16 @@
             // Get message body
             $message_body = $text;
 
+            // Remove signature
+            list ($message_body) = preg_split('/^--\s*$/', $message_body);
+            
             // Santise outlook and outlook web
             list ($message_body) = explode("From: ". \Idno\Core\site()->config()->title." [mailto:", $message_body);
             list ($message_body) = explode("________________________________", $message_body);
             
+            
             // Eliminate a possible security hole where the special email address could be printed in the body (from jettmail)
-            $message_body = str_replace($EmailParser->extractEmail('to'), "", $message_body);
+            $message_body = trim(str_replace($EmailParser->extractEmail('to'), "", $message_body));
 
             // Trigger post handlers
             \Idno\Core\site()->triggerEvent('email/post', [
