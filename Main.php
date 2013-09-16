@@ -19,6 +19,13 @@
             }
             
             function registerPages() {
+                
+                // Register an account menu
+                \Idno\Core\site()->template()->extendTemplate('account/menu/items','account/emailpost/menu');
+                
+                
+                // Register the callback URL
+                 \Idno\Core\site()->addPageHandler('account/emailposting','\IdnoPlugins\IdnoEmailPosting\Pages\Account');
 	    }
 
         }
