@@ -32,6 +32,8 @@
             $text = $EmailParser->getMessageBody('text');
             $html = $EmailParser->getMessageBody('html');
 
+            error_log("Extracted text: text=" . strlen($text) . "bytes, html=" . strlen($html). "bytes");
+            
             // Get Any attachments
             $attachments = $EmailParser->getAttachments();
             if (!empty($attachments))
@@ -41,8 +43,9 @@
             $message_body = $text;
 
             // Remove signature
-            $message_body = substr($message_body, 0, strrpos($message_body, "\n--")); // list ($message_body) = preg_split('/^--\s*$/', $message_body);
-            
+            if (strrpos($message_body, "\n--")!==false)
+                $message_body = substr($message_body, 0, strrpos($message_body, "\n--")); // list ($message_body) = preg_split('/^--\s*$/', $message_body);
+     
             // Santise outlook and outlook web
             list ($message_body) = explode("From: ". \Idno\Core\site()->config()->title." [mailto:", $message_body);
             list ($message_body) = explode("________________________________", $message_body);
@@ -75,3 +78,4 @@
 
         
         error_log("**************************************************");
+
