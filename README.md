@@ -29,6 +29,30 @@ Installation
 ```
   And then bounce any email you get to this alias.
   
+  In exim you might do this by editing the routers section in exim4.conf.template
+  
+```
+
+catch_idno:
+        debug_print = "R: Idno posting for $local_part@$domain"
+        driver = redirect
+        domains = [your domain]
+        data = idno@localhost
+
+```
+  If you only want to add support for a _specific_ address, but allow all other messages to behave normally, then add the following to the above.
+  
+```
+        local_parts = [your secret email code (before the @)]
+```
+
+
+  Note, by default, exim doesn't allow piping to a script. Enable it by editing/creating exim4.conf.localmacros and adding:
+
+```
+SYSTEM_ALIASES_PIPE_TRANSPORT = address_pipe
+```
+  
 Todo/Bugs
 ---------
 
