@@ -52,6 +52,15 @@ catch_idno:
 ```
 SYSTEM_ALIASES_PIPE_TRANSPORT = address_pipe
 ```
+
+Syndication
+-----------
+
+To POSSE syndicate to silo services like Twitter or Facebook, use the service name as a hashtag in the subject line of your email.
+
+For example:
+
+```I just ate some cake #twitter #facebook```  
   
 Todo/Bugs
 ---------
