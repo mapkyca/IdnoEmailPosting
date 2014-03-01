@@ -65,7 +65,6 @@
                         foreach ($matches[0] as $match)
                             $syndication[] = trim($match, '# ');
                         
-                        \Idno\Core\site()->currentPage()->setInput('syndication', $syndication);
                     }
 
                     // If there are attachments, see if any of them are pictures
@@ -97,7 +96,7 @@
                                     ]
                                 ];
                                 
-                                $this->callAction('/photo/edit', 'IdnoPlugins\Photo\Pages\Edit', ['body' => $body, 'title' => $subject]);
+                                $this->callAction('/photo/edit', 'IdnoPlugins\Photo\Pages\Edit', ['body' => $body, 'title' => $subject, 'syndication' => $syndication]);
                             }
                             
                         }
@@ -106,11 +105,11 @@
                     
                     // If short message, post as status
                     if (strlen("$subject $body") <= 140) {
-                        $this->callAction('/status/edit', 'IdnoPlugins\Status\Pages\Edit', ['body' => "$subject $body"]);
+                        $this->callAction('/status/edit', 'IdnoPlugins\Status\Pages\Edit', ['body' => "$subject $body", 'syndication' => $syndication]);
                     }
                     
                     // Longer form, post as post
-                    $this->callAction('/text/edit', 'IdnoPlugins\Text\Pages\Edit', ['body' => $body, 'title' => $subject]);
+                    $this->callAction('/text/edit', 'IdnoPlugins\Text\Pages\Edit', ['body' => $body, 'title' => $subject, 'syndication' => $syndication]);
                     
                 });
                  
