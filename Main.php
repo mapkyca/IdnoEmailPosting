@@ -54,7 +54,20 @@
                     $subject = $event->data()['subject'];
                     $body = $event->data()['body'];
                     $attachments = $event->data()['attachments'];
+                    $syndication = [];
                     
+                    // Parse subject for syndication hashtags
+                    $matches = [];
+                    if (preg_match_all('/\#[a-zA-Z]+/', $subject, $matches)) {
+                        $subject = explode('#', $subject);
+                        $subject = trim($subject[0]);
+                        
+                        foreach ($matches[0] as $match)
+                            $syndication[] = trim($match, '# ');
+                        
+                        \Idno\Core\site()->currentPage()->setInput('syndication', $syndication);
+                    }
+
                     // If there are attachments, see if any of them are pictures
                     if (!empty($attachments)) {
                         
