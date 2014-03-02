@@ -58,12 +58,12 @@
                     
                     // Parse subject for syndication hashtags
                     $matches = [];
-                    if (preg_match_all('/\#[a-zA-Z]+/', $subject, $matches)) {
-                        $subject = explode('#', $subject);
+                    if (preg_match_all('/\|[a-zA-Z]+/', $subject, $matches)) {
+                        $subject = explode('|', $subject);
                         $subject = trim($subject[0]);
                         
                         foreach ($matches[0] as $match)
-                            $syndication[] = trim($match, '# ');
+                            $syndication[] = trim($match, '| ');
                         
                     }
 
