@@ -56,7 +56,7 @@ SYSTEM_ALIASES_PIPE_TRANSPORT = address_pipe
 Syndication
 -----------
 
-To POSSE syndicate to silo services like Twitter or Facebook, use the service name as a | (pipe) in the subject line of your email.
+To POSSE syndicate to silo services like Twitter or Facebook, use the service name as a | (pipe) in the subject line or the body of your message.
 
 For example:
 
