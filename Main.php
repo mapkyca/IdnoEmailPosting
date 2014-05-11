@@ -66,6 +66,23 @@
                             $syndication[] = trim($match, '| ');
                         
                     }
+		    
+		    // Parse body for syndication hashtags
+		    $matches = [];
+                    if (preg_match_all('/\|[a-zA-Z]+/m', $body, $matches)) {
+			$body = preg_replace('/\|[a-zA-Z]+/m', ' ', $body); // Remove tags from body
+                        foreach ($matches[0] as $match)
+                            $syndication[] = trim($match, '| ');
+                    }
+		    
+		    $syndication = array_unique($syndication); // Remove duplicates
+		    
+		    if (count($syndication))
+			foreach ($syndication as $service)
+			    error_log("Syndicating to $service");
+		    
+		    // Remove any blank lines from end of body (which may be left over from removing tags)
+		    $body = rtrim($body);
 
                     // If there are attachments, see if any of them are pictures
                     if (!empty($attachments)) {
