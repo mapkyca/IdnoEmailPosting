@@ -65,6 +65,7 @@ For example:
 Todo/Bugs
 ---------
 
+* [ ] Hook into new notifications system to provide direct reply to notifications.
 * [ ] When posting images, quite often the mail parsing functions won't find the text part of the message. Not sure why...
 
 Licence
