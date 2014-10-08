@@ -12,7 +12,7 @@
             {
                 $this->gatekeeper(); // Logged-in users only
                 $t = \Idno\Core\site()->template();
-                $body = $t->__(['login_url' => $login_url])->draw('account/emailpost');
+                $body = $t->__([])->draw('account/emailpost');
                 $t->__(['title' => 'Post via Email', 'body' => $body])->drawPage();
             }
 
